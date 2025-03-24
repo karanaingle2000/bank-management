@@ -14,6 +14,7 @@ const Register = () => {
     phoneNo: ''
   });
 
+  const [photo, setPhoto] = useState(null); // State to hold the uploaded photo
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [accountNo, setAccountNo] = useState(''); // State to hold the generated account number
@@ -25,10 +26,26 @@ const Register = () => {
     setSuccess('');
   };
 
+  const handleFileChange = (e) => {
+    setPhoto(e.target.files[0]); // Set the selected file
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault();
+    const formDataToSend = new FormData();
+    for (const key in formData) {
+      formDataToSend.append(key, formData[key]);
+    }
+    if (photo) {
+      formDataToSend.append('photo', photo); // Append the photo file
+    }
+
     try {
-      const response = await axios.post('http://localhost:8080/api/bank/register', formData);
+      const response = await axios.post('http://localhost:8080/api/bank/register', formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       if (response.status === 200) {
         setSuccess(response.data.message); // Set success message
         setAccountNo(response.data.accountNo); // Set the generated account number
@@ -42,6 +59,7 @@ const Register = () => {
           password: '',
           phoneNo: ''
         });
+        setPhoto(null); // Reset photo state
       }
     } catch (error) {
       if (error.response && error.response.data) {
@@ -152,6 +170,15 @@ const Register = () => {
                 onChange={handleChange}
                 placeholder="Password"
                 className="border border-gray-300 pl-10 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+            <div className="relative mb-4">
+              <input
+                type="file"
+                name="photo"
+                onChange={handleFileChange}
+                className="border border-gray-300 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
             </div>

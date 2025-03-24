@@ -15,9 +15,10 @@ const Dashboard = () => {
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [occupation, setOccupation] = useState('');
- const [dob, setDob] = useState('');
-  const password = localStorage.getItem('password');
+  const [dob, setDob] = useState('');
   const [pin, setPin] = useState('');
+  const [photoPath, setPhotoPath] = useState(''); // State for photo path
+  const password = localStorage.getItem('password');
 
   useEffect(() => {
     const fetchAccountInfo = async () => {
@@ -45,7 +46,8 @@ const Dashboard = () => {
         setOccupation(customerResponse.data.occupation);
         setDob(customerResponse.data.dob);
         setPin(customerResponse.data.password);
-        
+        setPhotoPath(customerResponse.data.photoPath);  
+
       } catch (error) {
         console.error('Error fetching account information:', error);
         const errorMessage = error.response?.data?.message || 'Failed to fetch account information. Please try again later.';
@@ -79,10 +81,10 @@ const Dashboard = () => {
   const handleUpdateInfo = () => {
     navigate('/update');
   };
+
   const handleTransction = () => {
     navigate('/transaction');
   };
-
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -105,6 +107,31 @@ const Dashboard = () => {
             <p className="text-lg">Balance: ${balance}</p>
             <p className="text-lg">Account No: {accountNo}</p>
 
+            
+            {photoPath && (
+  <div className="mt-4">
+    <img 
+      src={`http://localhost:8080/uploads/${photoPath}`} 
+      alt="Account Holder" 
+      className="w-32 h-32 rounded-full" 
+      onError={(e) => { e.target.onerror = null; e.target.src = './public/images/banklogo.jpg'; }}  
+    />
+  </div>
+)}
+     <div className="mt-4 flex space-x-4">
+              <button onClick={handleDeposit} className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded">
+                Deposit
+              </button>
+              <button onClick={handleWithdraw} className="bg-yellow-500 hover:bg-yellow-700 text-white px-4 py-2 rounded">
+                Withdraw
+              </button>
+              <button onClick={handleUpdateInfo} className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded">
+                Update Info
+              </button>
+              <button onClick={handleTransction} className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded">
+                Show Transaction 
+              </button>
+            </div>
             <button onClick={toggleInfo} className="mt-4 bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded">
               {showInfo ? 'Hide Info' : 'Show Info'}
             </button>
@@ -123,7 +150,7 @@ const Dashboard = () => {
                       <td className="border px-4 py-2">Name</td>
                       <td className="border px-4 py-2">{accountHolderName}</td>
                     </tr>
- <tr>
+                    <tr>
                       <td className="border px-4 py-2">Adhar No</td>
                       <td className="border px-4 py-2">{adhar}</td>
                     </tr>
@@ -151,20 +178,7 @@ const Dashboard = () => {
                 </table>
               </div>
             )}
-            <div className="mt-4 flex space-x-4">
-              <button onClick={handleDeposit} className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded">
-                Deposit
-              </button>
-              <button onClick={handleWithdraw} className="bg-yellow-500 hover:bg-yellow-700 text-white px-4 py-2 rounded">
-                Withdraw
-              </button>
-              <button onClick={handleUpdateInfo} className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded">
-                Update Info
-              </button>
-              <button onClick={handleTransction} className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded">
-                Show Transction 
-              </button>
-            </div>
+            
           </div>
         )}
       </div>

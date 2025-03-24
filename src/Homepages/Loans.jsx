@@ -109,20 +109,21 @@ const Loans = () => {
             <p>{loan.description}</p>
             <p className="text-gray-600">Interest Rate: {loan.interestRate}</p>
             <p className="text-gray-600">Duration: {loan.duration}</p>
-            <button 
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition cursor-pointer mt-2"
-              onClick={() => handleLearnMore(loan)}
-            >
-              Learn More
-            </button>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition cursor-pointer mt-4">
-              Apply for a Loan
-            </button>
+            <div className="mt-4 space-y-2">
+              <button 
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition cursor-pointer w-full"
+                onClick={() => handleLearnMore(loan)}
+              >
+                Learn More
+              </button>
+              <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition cursor-pointer w-full">
+                Apply for a Loan
+              </button>
+            </div>
           </div>
         ))}
       </div>
 
-      {/* Modal for displaying more information about the selected loan */}
       {selectedLoan && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded shadow-lg">
@@ -145,4 +146,4 @@ const Loans = () => {
   );
 };
 
-export default Loans;
+export default Loans
