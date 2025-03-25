@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { FaUser , FaIdCard, FaBriefcase, FaLock, FaPhone } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -11,13 +12,20 @@ const Register = () => {
     dob: '',
     occupation: '',
     password: '',
-    phoneNo: ''
+    phoneNo: '',
+    state: '',          // New field for state
+    district: '',       // New field for district
+    subDistrict: '',    // New field for sub-district
+    villageOrCity: '',  // New field for village or city
+    pincode: '',        // New field for pincode
+    landmark: ''        // New field for landmark
   });
 
   const [photo, setPhoto] = useState(null); // State to hold the uploaded photo
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [accountNo, setAccountNo] = useState(''); // State to hold the generated account number
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -57,7 +65,13 @@ const Register = () => {
           dob: '',
           occupation: '',
           password: '',
-          phoneNo: ''
+          phoneNo: '',
+          state: '',
+          district: '',
+          subDistrict: '',
+          villageOrCity: '',
+          pincode: '',
+          landmark: ''
         });
         setPhoto(null); // Reset photo state
       }
@@ -68,6 +82,9 @@ const Register = () => {
         setError('Registration failed. Please try again.');
       }
     }
+  };
+  const handleLogin = () => {
+    navigate('/login'); 
   };
 
   return (
@@ -101,6 +118,7 @@ const Register = () => {
                 onChange={handleChange}
                 placeholder="Aadhar Number"
                 className="border border-gray-300 pl-10 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                maxLength={12}
                 required
               />
             </div>
@@ -113,6 +131,7 @@ const Register = () => {
                 onChange={handleChange}
                 placeholder="PAN Number"
                 className="border border-gray-300 pl-10 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                maxLength={10}
                 required
               />
             </div>
@@ -161,6 +180,96 @@ const Register = () => {
                 required
               />
             </div>
+           
+            <div className="relative mb-4">
+              <input
+                type="file"
+                name="photo"
+                onChange={handleFileChange}
+                placeholder='Upload Photo'
+                className="border border-gray-300 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+            {/* New fields for state, district, sub-district, village/city, pincode, and landmark */}
+            <div className="relative mb-4">
+              <input
+                type="text"
+                name="state"
+                value={formData.state}
+                onChange={handleChange}
+                placeholder="State"
+                className="border border-gray-300 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+            <div className="relative mb-4">
+              <input
+                type="text"
+                name="district"
+                value={formData.district}
+                onChange={handleChange}
+                placeholder="District"
+                className="border border-gray-300 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+            <div className="relative mb-4">
+              <input
+                type="text"
+                name="subDistrict"
+                value={formData.subDistrict}
+                onChange={handleChange}
+                placeholder="Sub-District"
+                className="border border-gray-300 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+            <div className="relative mb-4">
+              <input
+                type="text"
+                name="villageOrCity"
+                value={formData.villageOrCity}
+                onChange={handleChange}
+                placeholder="Village/City"
+                className="border border-gray-300 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+            <div className="relative mb-4">
+              <input
+                type="text"
+                name="pincode"
+                value={formData.pincode}
+                onChange={handleChange}
+                placeholder="Pincode"
+                className="border border-gray-300 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+            <div className="relative mb-4">
+              <input
+                type="text"
+                name="landmark"
+                value={formData.landmark}
+                onChange={handleChange}
+                placeholder="Landmark"
+                className="border border-gray-300 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+            <div className="relative mb-4">
+              <FaUser  className="absolute left-3 top-3 text-gray-400" />
+              <input
+                type="text"
+                name="branch"
+                // value={formData.fullName}
+                // onChange={handleChange}
+                placeholder="Branch Name"
+                className="border border-gray-300 pl-10 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
             <div className="relative mb-4">
               <FaLock className="absolute left-3 top-3 text-gray-400" />
               <input
@@ -170,22 +279,22 @@ const Register = () => {
                 onChange={handleChange}
                 placeholder="Password"
                 className="border border-gray-300 pl-10 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div className="relative mb-4">
-              <input
-                type="file"
-                name="photo"
-                onChange={handleFileChange}
-                className="border border-gray-300 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                minLength={4}
                 required
               />
             </div>
             <button type="submit" className="bg-blue-500 text-white p-2 w-full rounded hover:bg-blue-600 transition duration-300">
               Register
             </button>
+            
           </form>
+          <br />
+          <button onClick={handleLogin} className="mt-4 bg-green-500 text-white p-2 w-full rounded hover:bg-green-600 transition duration-300">
+              Go to Login Page
+            </button>
+          
+            
+          
         </div>
       </div>
     </div>
