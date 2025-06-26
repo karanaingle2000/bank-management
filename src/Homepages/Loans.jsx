@@ -7,7 +7,7 @@ const loanOptions = [
     details: "Personal loans can be used for various purposes, including debt consolidation, home improvements, and unexpected expenses. They typically have fixed interest rates and repayment terms. The application process is straightforward, and funds can be disbursed quickly. Personal loans are unsecured, meaning you don't need to provide collateral. Loan amounts can range from $1,000 to $50,000, with repayment terms of 1 to 5 years.",
     interestRate: "10% APR",
     duration: "1 to 5 years",
-    image: "./public/images/personalloan.jpg",
+    image: "/images/personalloan.jpg",
   },
   {
     title: "Home Loans",
@@ -15,7 +15,7 @@ const loanOptions = [
     details: "Home loans are designed for purchasing real estate. They usually come with lower interest rates compared to personal loans and can be paid over a long period. Home loans can be fixed-rate or adjustable-rate, allowing you to choose the best option for your financial situation. The loan amount is typically based on the property's value, and you may need to provide a down payment. Repayment terms can range from 15 to 30 years.",
     interestRate: "3.5% APR",
     duration: "15 to 30 years",
-    image: "./public/images/homeloan.jpg",
+    image: "/images/homeloan.jpg",
   },
   {
     title: "Car Loans",
@@ -23,7 +23,7 @@ const loanOptions = [
     details: "Car loans help you purchase a vehicle by providing the necessary funds upfront. You repay the loan amount over time, usually with interest. Car loans can be secured by the vehicle itself, which may result in lower interest rates. Loan amounts typically range from $5,000 to $100,000, depending on the vehicle's price. Repayment terms usually vary from 3 to 7 years.",
     interestRate: "5% APR",
     duration: "3 to 7 years",
-    image: "./public/images/carloan.webp",
+    image: "./images/carloan.webp",
   },
   {
     title: "Education Loans",
@@ -31,7 +31,7 @@ const loanOptions = [
     details: "Education loans cover tuition fees, books, and living expenses while you study. They often have flexible repayment options, allowing you to start repaying after graduation. Interest rates can be lower than personal loans, and some loans offer deferment options while you are in school. Loan amounts can vary based on the institution and program, with repayment terms typically ranging from 5 to 15 years.",
     interestRate: "4% APR",
     duration: "5 to 15 years",
-    image: "./public/images/educationloan.webp",
+    image: "./images/educationloan.webp",
   },
   {
     title: "Business Loans",
@@ -39,7 +39,7 @@ const loanOptions = [
     details: "Business loans provide capital for starting or expanding a business. They can be used for equipment, inventory, or operational costs. Business loans can be secured or unsecured, depending on the amount and type of financing. Interest rates may vary based on the business's creditworthiness and the loan's terms. Loan amounts can range from $5,000 to several million dollars, with repayment terms typically between 1 to 10 years.",
     interestRate: "7% APR",
     duration: "1 to 10 years",
-    image: "./public/images/business.jpg",
+    image: "./images/business.jpg",
   },
   {
     title: "Medical Loans",
@@ -47,7 +47,7 @@ const loanOptions = [
     details: "Medical loans can help cover the costs of medical treatments, surgeries, or procedures that are not covered by insurance. These loans often have flexible repayment options and can be used for both planned and emergency medical expenses. Interest rates are typically competitive, and the application process is quick. Loan amounts can vary based on the treatment required, with repayment terms ranging from 1 to 5 years.",
     interestRate: "8% APR",
     duration: "1 to 5 years",
-    image: "./public/images/medicalloan.jpg",
+    image: "./images/medicalloan.jpg",
   },
   {
     title: "Travel Loans",
@@ -55,7 +55,7 @@ const loanOptions = [
     details: "Travel loans can help you finance your dream vacation or travel plans, allowing you to pay for flights, accommodations, and activities. These loans typically have flexible repayment terms and can be used for both domestic and international travel. Interest rates may vary based on your credit score and the loan amount. Loan amounts can range from $1,000 to $20,000, with repayment terms of 1 to 5 years.",
     interestRate: "9% APR",
     duration: "1 to 5 years",
-    image: "./public/images/travalloan.avif",
+    image: "./images/travalloan.avif",
   },
   {
     title: "Wedding Loans",
@@ -63,7 +63,7 @@ const loanOptions = [
     details: "Wedding loans can help cover the costs of your wedding, including venue, catering, and other expenses. These loans often have flexible repayment options and can be tailored to fit your budget. Interest rates are typically competitive, and the application process is straightforward. Loan amounts can range from $1,000 to $50,000, with repayment terms of 1 to 5 years.",
     interestRate: "6% APR",
     duration: "1 to 5 years",
-    image: "./public/images/weddingloan.png",
+    image: "./images/weddingloan.png",
   },
   {
     title: "Debt Consolidation Loans",
@@ -71,7 +71,7 @@ const loanOptions = [
     details: "Debt consolidation loans allow you to combine several debts into one loan with a single monthly payment, often at a lower interest rate. This can simplify your finances and help you manage your payments more effectively. Interest rates may vary based on your credit score and the total amount of debt being consolidated. Loan amounts can range from $1,000 to $50,000, with repayment terms typically between 2 to 5 years.",
     interestRate: "5.5% APR",
     duration: "2 to 5 years",
-    image: "./public/images/debtloan.webp",
+    image: "./images/debtloan.webp",
   },
   {
     title: "Green Loans",
@@ -79,7 +79,7 @@ const loanOptions = [
     details: "Green loans are designed to finance environmentally friendly projects, such as solar panel installations or energy-efficient home upgrades. These loans often come with lower interest rates and favorable terms to encourage sustainable practices. Loan amounts can vary based on the project, with repayment terms typically ranging from 5 to 15 years.",
     interestRate: "4.5% APR",
     duration: "5 to 15 years",
-    image: "./images/greenloan.jpg",
+    image: "./greenloan.jpg",
   },
 ];
 

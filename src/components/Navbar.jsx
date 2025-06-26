@@ -14,7 +14,7 @@ const Navbar = () => {
     <nav className="bg-gray-800 p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
-          <img src="./public/images/banklogo.jpg" alt="Bank Logo" className="h-10 mr-3 object-cover rounded" />
+          <img src="./images/banklogo.jpg" alt="Bank Logo" className="h-10 mr-3 object-cover rounded" />
           <h1 className="text-white text-2xl">Magdha Bank</h1>
         </div>
         <div className="hidden md:flex items-center ml-auto space-x-10">

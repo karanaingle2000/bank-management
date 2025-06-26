@@ -136,7 +136,7 @@ const Dashboard = () => {
                     src={`http://localhost:8080/uploads/${photoPath}`} 
                     alt="Account Holder" 
                     className="w-32 h-32 rounded-full border-4 border-blue-500 shadow-lg" 
-                    onError={(e) => { e.target.onerror = null; e.target.src = './images/banklogo.jpg'; }}  
+                    onError={(e) => { e.target.onerror = null; e.target.src = '/images/banklogo.jpg'; }}  
                   />
                 </div>
               )}
