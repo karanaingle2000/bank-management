@@ -105,6 +105,11 @@ const Dashboard = () => {
     }
   };
 
+  // New function to handle update navigation
+  const handleUpdate = () => {
+    navigate('/update'); // Adjust the route to your update page
+  };
+
   return (
     <div className="min-h-screen bg-gray-100">
       <header className="bg-gradient-to-r from-blue-800 to-blue-600 p-4 text-white shadow-md">
@@ -150,49 +155,52 @@ const Dashboard = () => {
                 <button onClick={handleTransaction} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition duration-300">
                   Transactions
                 </button>
+                <button onClick={handleUpdate} className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition duration-300">
+                  Update
+                </button>
               </div>
             </div>
 
             {/* Card 2: Quick Transfer */}
-<div className="bg-white rounded-lg shadow-lg p-6 transition-transform transform hover:scale-105">
-  <h2 className="text-lg font-semibold text-gray-700">Quick Transfer</h2>
-  <input
-      className="w-full p-2 mb-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-      placeholder="Recipient Account No"
-      type="text"
-      value={recipientAccountNo}
-      onChange={(e) => setRecipientAccountNo(e.target.value)}
-  />
-  <input
-      className="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-      placeholder="Enter amount"
-      type="number"
-      value={transferAmount}
-      onChange={(e) => setTransferAmount(e.target.value)}
-  />
-  
-  {/* Predefined Amount Buttons */}
-  <div className="flex flex-wrap gap-2 mb-4">
-    {[100, 200, 500, 1000, 2000, 5000].map((amount) => (
-      <button
-        key={amount}
-        onClick={() => setTransferAmount(amount)}
-        className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded transition duration-300"
-      >
-        ${amount}
-      </button>
-    ))}
-  </div>
+            <div className="bg-white rounded-lg shadow-lg p-6 transition-transform transform hover:scale-105">
+              <h2 className="text-lg font-semibold text-gray-700">Quick Transfer</h2>
+              <input
+                  className="w-full p-2 mb-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Recipient Account No"
+                  type="text"
+                  value={recipientAccountNo}
+                  onChange={(e) => setRecipientAccountNo(e.target.value)}
+              />
+              <input
+                  className="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter amount"
+                  type="number"
+                  value={transferAmount}
+                  onChange={(e) => setTransferAmount(e.target.value)}
+              />
+              
+              {/* Predefined Amount Buttons */}
+              <div className="flex flex-wrap gap-2 mb-4">
+                {[100, 200, 500, 1000, 2000, 5000].map((amount) => (
+                  <button
+                    key={amount}
+                    onClick={() => setTransferAmount(amount)}
+                    className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded transition duration-300"
+                  >
+                    ${amount}
+                  </button>
+                ))}
+              </div>
 
-  <button
-      onClick={handleTransfer}
-      className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition duration-300"
-  >
-      Send Money
-  </button>
-  {transferError && <p className="text-red-500 mt-2">{transferError}</p>}
-  {transferSuccess && <p className="text-green-500 mt-2">{transferSuccess}</p>}
-</div>
+              <button
+                  onClick={handleTransfer}
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition duration-300"
+              >
+                  Send Money
+              </button>
+              {transferError && <p className="text-red-500 mt-2">{transferError}</p>}
+              {transferSuccess && <p className="text-green-500 mt-2">{transferSuccess}</p>}
+            </div>
 
             {/* Card 3: Customer Information */}
             <div className="bg-white rounded-lg shadow-lg p-6 transition-transform transform hover:scale-105">
