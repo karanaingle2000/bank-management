@@ -13,7 +13,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative h-[740px] bg-cover bg-center" style={{ backgroundImage: "url('./public/images/contactus.jpg')" }}>
+    <div className="relative h-[740px] bg-cover bg-center" style={{ backgroundImage: "url('./images/homebank.webp')" }}>
       <div className="absolute inset-0 bg-black opacity-50"></div>
       <div className={`relative flex flex-col items-center justify-center h-full text-center p-4 transition-opacity duration-700 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
         <h2 className="text-white text-4xl font-bold mb-2">Welcome to Our Bank</h2>

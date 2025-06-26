@@ -32,8 +32,7 @@ const Update = () => {
           dob: customerResponse.data.dob || '',
           occupation: customerResponse.data.occupation || '',
           phoneNo: customerResponse.data.phoneNo || '',
-          password:    customerResponse.data.password || '',
-        });
+         });
       } catch (error) {
         setError('Failed to fetch user data. Please try again.');
       }
@@ -52,7 +51,7 @@ const Update = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put('http://localhost:8080/api/bank/customer1',accountNo, formData);
+      const response = await axios.put('http://localhost:8080/api/bank/customer1', { accountNo });
       if (response.status === 200) {
         setSuccess('Information updated successfully!');
         setError('');
@@ -157,17 +156,7 @@ const Update = () => {
                 required
               />
             </div>
-            <div className="relative mb-4">
-              <FaLock className="absolute left-3 top-3 text-gray-400" />
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Password (leave blank to keep unchanged)"
-                className="border border-gray-300 pl-10 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
+            
             <button type="submit" className="bg-blue-500 text-white p-2 w-full rounded hover:bg-blue-600 transition duration-300">
               Update Information
             </button>

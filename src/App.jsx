@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Update from './components/update';
 import Transaction from './components/Transaction';
+import ForgotPassword from './components/ForgotPassword';
   
 
 const App = () => {
@@ -25,7 +26,8 @@ const App = () => {
           <Route path="/loans" element={<Loans />} />
           <Route path="/contact" element={<Contact />} /> 
           <Route path="/update" element={<Update />} />
-          <Route path="/transaction" element={<Transaction />} />   
+          <Route path="/transaction" element={<Transaction />} />  
+          <Route path="/forgot-password" element={<ForgotPassword />} />
  
 
           <Route path="/register" element={<Register />} />

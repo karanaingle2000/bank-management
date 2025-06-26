@@ -1,4 +1,2 @@
 @import "tailwindcss";
-button{
-    @apply active:bg-amber-200 cursor-pointer
-}
+ 

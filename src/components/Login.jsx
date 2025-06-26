@@ -41,7 +41,7 @@ const Login = () => {
 
   return (
     <div className="flex min-h-screen p-14 bg-gray-100">
-      <div className="hidden lg:flex lg:w-1/2 bg-cover bg-center" style={{ backgroundImage: "url('./public/images/banklogin.jpg')" }}></div>
+      <div className="hidden lg:flex lg:w-1/2 bg-cover bg-center" style={{ backgroundImage: "url('./images/banklogin.jpg')" }}></div>
       <div className="flex items-center justify-center w-full lg:w-1/2 p-8">
         <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md transform transition-all duration-500 hover:scale-105">
           <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Login to Your Account</h2>
@@ -84,6 +84,14 @@ const Login = () => {
               className="text-blue-500 underline ml-1"
             >
               Register here
+            </button>
+          </p>
+          <p className="mt-2 text-center">
+            <button 
+              onClick={() => navigate('/forgot-password')}
+              className="text-blue-500 underline"
+            >
+              Forgot Password?
             </button>
           </p>
         </div>

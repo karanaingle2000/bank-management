@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { FaUser , FaIdCard, FaBriefcase, FaLock, FaPhone } from 'react-icons/fa';
+import { FaUser , FaIdCard, FaBriefcase, FaLock, FaPhone, FaEnvelope } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
@@ -13,18 +13,20 @@ const Register = () => {
     occupation: '',
     password: '',
     phoneNo: '',
-    state: '',          // New field for state
-    district: '',       // New field for district
-    subDistrict: '',    // New field for sub-district
-    villageOrCity: '',  // New field for village or city
-    pincode: '',        // New field for pincode
-    landmark: ''        // New field for landmark
+    email: '', // New field for email
+    state: '',
+    district: '',
+    subDistrict: '',
+    villageOrCity: '',
+    pincode: '',
+    landmark: ''
   });
 
-  const [photo, setPhoto] = useState(null); // State to hold the uploaded photo
+  const [photo, setPhoto] = useState(null);
+  const [otp, setOtp] = useState(''); // State for OTP
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [accountNo, setAccountNo] = useState(''); // State to hold the generated account number
+  const [accountNo, setAccountNo] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -35,7 +37,7 @@ const Register = () => {
   };
 
   const handleFileChange = (e) => {
-    setPhoto(e.target.files[0]); // Set the selected file
+    setPhoto(e.target.files[0]);
   };
 
   const handleRegister = async (e) => {
@@ -45,7 +47,7 @@ const Register = () => {
       formDataToSend.append(key, formData[key]);
     }
     if (photo) {
-      formDataToSend.append('photo', photo); // Append the photo file
+      formDataToSend.append('photo', photo);
     }
 
     try {
@@ -55,8 +57,8 @@ const Register = () => {
         }
       });
       if (response.status === 200) {
-        setSuccess(response.data.message); // Set success message
-        setAccountNo(response.data.accountNo); // Set the generated account number
+        setSuccess(response.data.message);
+        setAccountNo(response.data.accountNo);
         setFormData({
           fullName: '',
           aadharNo: '',
@@ -66,14 +68,10 @@ const Register = () => {
           occupation: '',
           password: '',
           phoneNo: '',
-          state: '',
-          district: '',
-          subDistrict: '',
-          villageOrCity: '',
-          pincode: '',
-          landmark: ''
+          email: '', // Reset email
+          
         });
-        setPhoto(null); // Reset photo state
+        setPhoto(null);
       }
     } catch (error) {
       if (error.response && error.response.data) {
@@ -83,19 +81,36 @@ const Register = () => {
       }
     }
   };
+
+  const handleOtpChange = (e) => {
+    setOtp(e.target.value);
+  };
+
+  const handleVerifyOtp = async () => {
+    // Implement OTP verification logic here
+    try {
+      const response = await axios.post('http://localhost:8080/api/bank/verify-otp', { otp });
+      if (response.status === 200) {
+        setSuccess('OTP verified successfully!');
+      }
+    } catch (error) {
+      setError('OTP verification failed. Please try again.');
+    }
+  };
+
   const handleLogin = () => {
-    navigate('/login'); 
+    navigate('/login');
   };
 
   return (
     <div className="flex min-h-screen bg-gray-100">
-      <div className="hidden lg:flex lg:w-1/2 bg-cover bg-center" style={{ backgroundImage: "url('./public/images/banklogin.jpg')" }}></div>
+      <div className="hidden lg:flex lg:w-1/2 bg-cover bg-center" style={{ backgroundImage: "url('./public/images/banklogin.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
       <div className="flex items-center justify-center w-full lg:w-1/2 p-8">
         <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md transform transition-all duration-500 hover:scale-105">
           <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Bank Registration</h2>
           {error && <p className="text-red-500 mb-4">{error}</p>}
           {success && <p className="text-green-500 mb-4">{success}</p>}
-          {accountNo && <p className="text-blue-500 mb-4">Your Account Number: {accountNo}</p>} {/* Display the account number */}
+          {accountNo && <p className="text-blue-500 mb-4">Your Account Number: {accountNo}</p>}
           <form onSubmit={handleRegister}>
             <div className="relative mb-4">
               <FaUser  className="absolute left-3 top-3 text-gray-400" />
@@ -105,6 +120,18 @@ const Register = () => {
                 value={formData.fullName}
                 onChange={handleChange}
                 placeholder="Full Name"
+                className="border border-gray-300 pl-10 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+            <div className="relative mb-4">
+              <FaEnvelope className="absolute left-3 top-3 text-gray-400" />
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Email"
                 className="border border-gray-300 pl-10 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
@@ -156,6 +183,8 @@ const Register = () => {
                 onChange={handleChange}
                 placeholder="Phone Number"
                 className="border border-gray-300 pl-10 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                minLength={10}
+                maxLength={10}
                 required
               />
             </div>
@@ -180,7 +209,6 @@ const Register = () => {
                 required
               />
             </div>
-           
             <div className="relative mb-4">
               <input
                 type="file"
@@ -192,84 +220,13 @@ const Register = () => {
               />
             </div>
             {/* New fields for state, district, sub-district, village/city, pincode, and landmark */}
-            <div className="relative mb-4">
-              <input
-                type="text"
-                name="state"
-                value={formData.state}
-                onChange={handleChange}
-                placeholder="State"
-                className="border border-gray-300 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div className="relative mb-4">
-              <input
-                type="text"
-                name="district"
-                value={formData.district}
-                onChange={handleChange}
-                placeholder="District"
-                className="border border-gray-300 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div className="relative mb-4">
-              <input
-                type="text"
-                name="subDistrict"
-                value={formData.subDistrict}
-                onChange={handleChange}
-                placeholder="Sub-District"
-                className="border border-gray-300 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div className="relative mb-4">
-              <input
-                type="text"
-                name="villageOrCity"
-                value={formData.villageOrCity}
-                onChange={handleChange}
-                placeholder="Village/City"
-                className="border border-gray-300 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div className="relative mb-4">
-              <input
-                type="text"
-                name="pincode"
-                value={formData.pincode}
-                onChange={handleChange}
-                placeholder="Pincode"
-                className="border border-gray-300 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div className="relative mb-4">
-              <input
-                type="text"
-                name="landmark"
-                value={formData.landmark}
-                onChange={handleChange}
-                placeholder="Landmark"
-                className="border border-gray-300 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div className="relative mb-4">
-              <FaUser  className="absolute left-3 top-3 text-gray-400" />
-              <input
-                type="text"
-                name="branch"
-                // value={formData.fullName}
-                // onChange={handleChange}
-                placeholder="Branch Name"
-                className="border border-gray-300 pl-10 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
+             
+            
+            
+            
+            
+             
+             
             <div className="relative mb-4">
               <FaLock className="absolute left-3 top-3 text-gray-400" />
               <input
@@ -283,18 +240,29 @@ const Register = () => {
                 required
               />
             </div>
-            <button type="submit" className="bg-blue-500 text-white p-2 w-full rounded hover:bg-blue-600 transition duration-300">
+            {/* OTP input field */}
+            <div className="relative mb-4">
+              <input
+                type="text"
+                name="otp"
+                value={otp}
+                onChange={handleOtpChange}
+                placeholder="Enter OTP"
+                className="border border-gray-300 p-2 w-full rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+            <button type="button" onClick={handleVerifyOtp} className="bg-yellow-500 text-white p-2 w-full rounded hover:bg-yellow-600 transition duration-300">
+              Verify OTP
+            </button>
+            <button type="submit" className="bg-blue-500 text-white p-2 w-full rounded hover:bg-blue-600 transition duration-300 mt-4">
               Register
             </button>
-            
           </form>
           <br />
           <button onClick={handleLogin} className="mt-4 bg-green-500 text-white p-2 w-full rounded hover:bg-green-600 transition duration-300">
-              Go to Login Page
-            </button>
-          
-            
-          
+            Go to Login Page
+          </button>
         </div>
       </div>
     </div>

@@ -1,4 +1,3 @@
-// components/Loans.js
 import React, { useState } from 'react';
 
 const loanOptions = [
@@ -80,7 +79,7 @@ const loanOptions = [
     details: "Green loans are designed to finance environmentally friendly projects, such as solar panel installations or energy-efficient home upgrades. These loans often come with lower interest rates and favorable terms to encourage sustainable practices. Loan amounts can vary based on the project, with repayment terms typically ranging from 5 to 15 years.",
     interestRate: "4.5% APR",
     duration: "5 to 15 years",
-    image: "./public/images/greenloan.jpg",
+    image: "./images/greenloan.jpg",
   },
 ];
 
@@ -96,27 +95,27 @@ const Loans = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-3xl font-bold mb-4">Loan Options</h2>
-      <p className="mb-4">
+    <div className="container mx-auto p-6 bg-gray-100">
+      <h2 className="text-4xl font-bold text-center text-blue-800 mb-6">Loan Options</h2>
+      <p className="text-center text-gray-700 mb-6">
         We offer a variety of loan options to suit your needs:
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {loanOptions.map((loan, index) => (
-          <div key={index} className="bg-white p-4 rounded shadow hover:shadow-lg transition">
-            <img src={loan.image} alt={loan.title} className="w-full h-72 object-cover rounded mb-2" />
-            <h3 className="text-xl font-semibold">{loan.title}</h3>
-            <p>{loan.description}</p>
-            <p className="text-gray-600">Interest Rate: {loan.interestRate}</p>
-            <p className="text-gray-600">Duration: {loan.duration}</p>
+          <div key={index} className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out">
+            <img src={loan.image} alt={loan.title} className="w-full h-48 object-cover rounded-t-lg mb-4" />
+            <h3 className="text-2xl font-semibold text-blue-600">{loan.title}</h3>
+            <p className="text-gray-600 mb-2">{loan.description}</p>
+            <p className="text-gray-500">Interest Rate: <span className="font-bold">{loan.interestRate}</span></p>
+            <p className="text-gray-500">Duration: <span className="font-bold">{loan.duration}</span></p>
             <div className="mt-4 space-y-2">
               <button 
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition cursor-pointer w-full"
+                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 cursor-pointer w-full"
                 onClick={() => handleLearnMore(loan)}
               >
                 Learn More
               </button>
-              <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition cursor-pointer w-full">
+              <button className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300 cursor-pointer w-full">
                 Apply for a Loan
               </button>
             </div>
@@ -125,16 +124,16 @@ const Loans = () => {
       </div>
 
       {selectedLoan && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded shadow-lg">
-            <h3 className="text-2xl font-semibold">{selectedLoan.title}</h3>
-            <img src={selectedLoan.image} alt={selectedLoan.title} className="w-full h-96 object-cover rounded mb-2" />
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70">
+          <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
+            <h3 className="text-3xl font-semibold text-blue-600">{selectedLoan.title}</h3>
+            <img src={selectedLoan.image} alt={selectedLoan.title} className="w-full h-64 object-cover rounded-lg mb-4" />
 
-            <p>{selectedLoan.details}</p>
-            <p className="text-gray-600">Interest Rate: {selectedLoan.interestRate}</p>
-            <p className="text-gray-600">Duration: {selectedLoan.duration}</p>
+            <p className="text-gray-700 mb-4">{selectedLoan.details}</p>
+            <p className="text-gray-500">Interest Rate: <span className="font-bold">{selectedLoan.interestRate}</span></p>
+            <p className="text-gray-500">Duration: <span className="font-bold">{selectedLoan.duration}</span></p>
             <button 
-              className="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+              className="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-300"
               onClick={closeModal}
             >
               Close
@@ -146,4 +145,4 @@ const Loans = () => {
   );
 };
 
-export default Loans
+export default Loans;
